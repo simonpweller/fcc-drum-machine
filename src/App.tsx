@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 const App = () => (
   <div id="drum-machine">
@@ -24,11 +24,25 @@ type DrumKeyProps = {
   letter: string;
 };
 
-const DrumKey = ({ id, name, letter }: DrumKeyProps) => (
-  <button id={id} className="drum-pad" data-sound={name}>
-    {letter}
-    <audio id={letter} src={`/public/sounds/${id}.wav`} className="clip" />
-  </button>
-);
+const DrumKey = ({ id, name, letter }: DrumKeyProps) => {
+  const audio = useRef<HTMLAudioElement>(null);
+
+  return (
+    <button
+      id={id}
+      className="drum-pad"
+      data-sound={name}
+      onClick={() => audio.current?.play()}
+    >
+      {letter}
+      <audio
+        ref={audio}
+        id={letter}
+        src={`/sounds/${id}.wav`}
+        className="clip"
+      />
+    </button>
+  );
+};
 
 export default App;
