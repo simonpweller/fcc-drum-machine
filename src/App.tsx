@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 const App = () => (
   <div id="drum-machine">
@@ -26,6 +26,15 @@ type DrumKeyProps = {
 
 const DrumKey = ({ id, name, letter }: DrumKeyProps) => {
   const audio = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const playAudioIfKeyMatchesLetter = (e: KeyboardEvent) =>
+      e.key.toUpperCase() === letter && audio.current?.play();
+
+    document.addEventListener("keypress", playAudioIfKeyMatchesLetter);
+    return () =>
+      document.removeEventListener("keypress", playAudioIfKeyMatchesLetter);
+  }, [audio, letter]);
 
   return (
     <button
