@@ -33,8 +33,11 @@ const DrumKey = ({ id, name, letter, setDisplay }: DrumKeyProps) => {
   const audio = useRef<HTMLAudioElement>(null);
 
   const handleKeyPush = useCallback(() => {
-    audio.current?.play().catch(() => {});
-    setDisplay(name);
+    if (audio.current) {
+      audio.current.currentTime = 0;
+      audio.current.play().catch(() => {});
+      setDisplay(name);
+    }
   }, [audio, setDisplay, name]);
 
   useEffect(() => {
