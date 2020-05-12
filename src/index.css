@@ -2,10 +2,36 @@ body {
   margin: 0;
 }
 
-#drum-machine {
-  display: grid;
-  height: 100vh;
-  width: 100vw;
+#root {
+  display: flex;
+  align-items: center;
   justify-content: center;
-  align-content: center;
+}
+
+#drum-machine {
+  height: 100vh;
+  margin: auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap-reverse; /* put the display on top on narrow screens */
+}
+
+#keys,
+#display {
+  height: 300px;
+  width: 300px;
+}
+
+#keys {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: auto auto auto;
+}
+
+#display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
