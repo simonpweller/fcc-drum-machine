@@ -17,7 +17,9 @@ const App = () => {
         <DrumKey id="tom" letter="C" name="Tom" setDisplay={setDisplay} />
       </div>
 
-      <div id="display">{display}</div>
+      <div id="display">
+        <div className="display-text">{display}</div>
+      </div>
     </div>
   );
 };
